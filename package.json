@@ -1,0 +1,22 @@
+{
+  "name": "p7_leaute",
+  "version": "1.0.0",
+  "description": "This is the social network project of the company Groupomania.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lokhiz/P7_leaute.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lokhiz/P7_leaute/issues"
+  },
+  "homepage": "https://github.com/lokhiz/P7_leaute#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
