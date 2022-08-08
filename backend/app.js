@@ -1,5 +1,12 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb+srv://lokhi:Carlos41!@cluster0.m0yui9o.mongodb.net/?retryWrites=true&w=majority',
+  { useNewUrlParser: true,
+    useUnifiedTopology: true })
+  .then(() => console.log('Connexion à la base de donnée réussie'))
+  .catch(() => console.log('Connexion à la base de donnée échouée'));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
