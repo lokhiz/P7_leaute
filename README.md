@@ -1,5 +1,5 @@
 # P7_leaute
-This is the social network project of the company Groupomania. This app was created with Node.js for the `backend` part and with React for the `frontend` part.
+This is the social network project of the company Groupomania. This app was created with `Node` for the backend part and with `React` for the frontend part.
 
 ## Prerequisites
 You will need to have Node and `npm` installed on your computer.
