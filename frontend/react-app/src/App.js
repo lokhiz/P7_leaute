@@ -1,11 +1,11 @@
 import "./index.css";
-import Auth from "./Components/Auth/Auth";
+import Register from "./Components/Register/Register";
 
 function App() {
 
   return (
     <>
-      <Auth />
+      <Register />
     </>
   );
 }

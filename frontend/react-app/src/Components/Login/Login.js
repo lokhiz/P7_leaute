@@ -1,4 +1,3 @@
-import "./Auth.css";
 import React, { useEffect, useState } from "react";
 
 function App() {
@@ -18,7 +17,10 @@ function App() {
 
   return (
     <form className="form">
-      <div className="title">Inscription</div>
+      <header>
+        <div className="title">Inscription</div>
+        <a className="loginLink">Connexion</a>
+      </header>
       <div className="input-container">
         <label>Adresse Mail : </label>
         <input
