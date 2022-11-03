@@ -1,55 +1,23 @@
-import React, { useEffect, useState } from "react";
+import "./Login.css";
+import logo from "../../assets/icon-left-font.png";
+import { useForm } from 'react-hook-form';
 
-function App() {
-  const [initialValues, setInitialValues] = useState({
-    email: "",
-    password: "",
-  });
-  const [formValues, setFormValues] = useState([]);
-
-  const submitForm = () => {
-    setFormValues((prevFormValues) => [...prevFormValues, initialValues]);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("formValues", JSON.stringify(formValues));
-  }, [formValues]);
+export function Login() {
+  const {login, setLogin} = useForm()
+  const onSubmit = data => console.log(data);
 
   return (
-    <form className="form">
-      <header>
-        <div className="title">Inscription</div>
-        <a className="loginLink">Connexion</a>
-      </header>
-      <div className="input-container">
-        <label>Adresse Mail : </label>
-        <input
-          value={initialValues.email}
-          onChange={(e) =>
-            setInitialValues({ ...initialValues, email: e.target.value })
-          }
-          type="email"
-          name="username"
-          required
-        />
+    <div className="Form">
+      <img src={logo} alt="Groupomania" className="logo" />
+      <div className="inputs">
+        <form>
+          <input type="text" name="email" placeholder="Email :" />
+
+          <input type="password" name="password" placeholder="Mot de passe :" />
+
+          <button>Connexion</button>
+        </form>
       </div>
-      <div className="input-container">
-        <label>Mot de passe : </label>
-        <input
-          value={initialValues.password}
-          onChange={(e) =>
-            setInitialValues({ ...initialValues, password: e.target.value })
-          }
-          type="password"
-          name="password"
-          required
-        />
-      </div>
-      <div className="button-container">
-        <button onClick={submitForm}>S'inscrire</button>
-      </div>
-    </form>
+    </div>
   );
 }
-
-export default App;
