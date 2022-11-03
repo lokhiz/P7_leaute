@@ -2,9 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const path = require("path");
-
+const cors = require("cors");
 const postsRoutes = require("./routes/posts");
 const userRoutes = require("./routes/user");
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 mongoose
   .connect(
