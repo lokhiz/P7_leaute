@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -17,25 +17,33 @@ export function Register() {
   const formOptions = { resolver: yupResolver(formSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
-  function onSubmit(data) {
-    console.log(JSON.stringify(data, null, 4));
-    return false;
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function postUserData(e) {
+    e.preventDefault();
+
+    try {
+      await axios.post("http://localhost:5000/register", {
+        email,
+        password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  const handleClick = (data) => {
-    axios.post("http://localhost:5000/register/", {
-      email: "",
-      password: "",
-    });
-  };
-
   return (
-    <form className="Form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="Form" onSubmit={postUserData}>
       <img src={logo} alt="Groupomania" className="logo" />
       <input
+        name="email"
         type="email"
         placeholder="Email :"
         {...register("email")}
+        value={email}
+        onChange={(e) => {setEmail(e.target.value)}}
         required
       />
       <div className="form-group">
@@ -44,6 +52,8 @@ export function Register() {
           type="password"
           placeholder="Mot de passe :"
           {...register("password")}
+          value={password}
+          onChange={(e) => {setPassword(e.target.value)}}
           className={`form-control ${errors.password ? "is-invalid" : ""}`}
         />
         <div className="invalid-feedback">{errors.password?.message}</div>
@@ -58,9 +68,7 @@ export function Register() {
         />
         <div className="invalid-feedback">{errors.confirmPwd?.message}</div>
       </div>
-      <button onClick={handleClick} type="submit">
-        Inscription
-      </button>
+      <button type="submit">Inscription</button>
     </form>
   );
 }
