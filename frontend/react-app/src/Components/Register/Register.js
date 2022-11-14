@@ -11,8 +11,8 @@ export function Register() {
 
     try {
       await axios.post("http://localhost:5000/register", {
-        email,
-        password,
+        email: email,
+        password: password,
       });
     } catch (error) {
       console.log(error);
