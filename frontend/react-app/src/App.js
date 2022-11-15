@@ -1,8 +1,9 @@
 import "./index.css";
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Register } from "./Components/Register/Register";
 import { Login } from "./Components/Login/Login";
+import { Home } from "./Components/Home/Home";
 
 const App = () => {
   const [view, setView] = useState("Inscription");
