@@ -38,6 +38,12 @@ header {
   margin: 0 20px;
 }
 
+.success-message {
+  display: flex;
+  padding: 50px;
+  justify-content: center;
+}
+
 a {
   text-decoration: none;
   padding: 0 10px;
@@ -103,13 +109,12 @@ nav {
 }
 
 a:hover {
-  background-color: #FFD7D7;
+  background-color: #ffd7d7;
 }
 
 a {
-
   padding: 15px;
-  background-color: #FD2D01;
+  background-color: #fd2d01;
   color: #fff;
   border-radius: 10px;
 }
