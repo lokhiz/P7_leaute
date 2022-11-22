@@ -20,6 +20,10 @@
   padding-top: 100px;
 }
 
+.Home {
+  position: relative;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
@@ -58,8 +62,12 @@ a:hover {
 }
 
 img {
-  width: 210px;
-  height: 210px;
+  position: absolute;
+  top: -60px;
+  width: 180px;
+  height: 180px;
+  left: 0px;
+  z-index: 0;
 }
 
 form {
@@ -96,7 +104,9 @@ main {
 .top-buttons {
   display: flex;
   justify-content: flex-end;
-  padding: 15px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 14px;
   background-color: #fd2d01;
   color: #fff;
   border-radius: 10px;
@@ -130,4 +140,20 @@ nav {
 
 .login-button {
   cursor: pointer;
+}
+
+.disconnect-button {
+  border-radius: 10px;
+  background-color: #fd2d01;
+  color: white;
+  font-size: 15px;
+  padding: 10px;
+  margin: 10px;
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+}
+
+.disconnect-button:hover {
+  background-color: #ffd7d7;
 }

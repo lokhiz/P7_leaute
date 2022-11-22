@@ -9,12 +9,6 @@ html {
   background-color: #fff;
 }
 
-.logo {
-  position: absolute;
-  top: -60px;
-  left: 10px;
-}
-
 button {
   margin-top: 10px;
   cursor: pointer;

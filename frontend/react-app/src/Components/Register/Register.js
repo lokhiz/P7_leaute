@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import logo from "../../assets/icon-left-font.png";
 
 export function Register() {
   const [email, setEmail] = useState("");
@@ -25,12 +24,10 @@ export function Register() {
     <>
       {success ? (
         <section>
-          <img src={logo} alt="Groupomania" className="logo" />
           <h1 className="success-message">Inscription réussie</h1>
         </section>
       ) : (
         <form className="Form" onSubmit={postUserData}>
-          <img src={logo} alt="Groupomania" className="logo" />
           <input
             name="email"
             type="email"

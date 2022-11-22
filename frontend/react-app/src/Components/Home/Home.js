@@ -1,11 +1,12 @@
-
-import logo from "../../assets/icon-left-font.png";
+import { Link } from 'react-router-dom'
 
 export const Home = () => {
   return (
-    <section>
-      <img src={logo} alt="Groupomania" className="logo" />
-    </section>
+    <>
+      <div className="Home">
+      </div>
+      <Link to={"/login"} className="disconnect-button">Déconnexion</Link>
+    </>
   )
 }
 
