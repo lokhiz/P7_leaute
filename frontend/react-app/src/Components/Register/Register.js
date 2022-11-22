@@ -25,7 +25,7 @@ export function Register() {
     <>
       {success ? (
         <section>
-        <img src={logo} alt="Groupomania" className="logo" />
+          <img src={logo} alt="Groupomania" className="logo" />
           <h1 className="success-message">Inscription réussie</h1>
         </section>
       ) : (
@@ -52,9 +52,11 @@ export function Register() {
               }}
             />
           </div>
-          <button type="submit">Inscription</button>
+          <button type="submit" className="submit-button">Inscription</button>
         </form>
       )}
     </>
   );
 }
+
+export default Register;

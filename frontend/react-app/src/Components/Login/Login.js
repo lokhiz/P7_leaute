@@ -21,32 +21,36 @@ export function Login() {
   }
 
   return (
-    <div className="Form" onSubmit={getUserData}>
-      <img src={logo} alt="Groupomania" className="logo" />
-      <div className="inputs">
-        <form>
-          <input
-            type="text"
-            name="email"
-            placeholder="Email :"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
+    <>
+        <div className="Form" onSubmit={getUserData}>
+          <img src={logo} alt="Groupomania" className="logo" />
+          <div className="inputs">
+            <form>
+              <input
+                type="text"
+                name="email"
+                placeholder="Email :"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Mot de passe :"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <button type="submit">Connexion</button>
-        </form>
-      </div>
-    </div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Mot de passe :"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <button type="submit" className="submit-button">Connexion</button>
+            </form>
+          </div>
+        </div>
+    </>
   );
 }
+
+export default Login;
