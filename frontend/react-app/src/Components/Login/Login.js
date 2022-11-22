@@ -1,4 +1,3 @@
-import "./Login.css";
 import axios from "axios";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
@@ -27,9 +26,7 @@ export function Login() {
       {success ? (
         <Navigate to='/homepage' replace />
       ) : (
-        <div className="Form" onSubmit={getUserData}>
-          <div className="inputs">
-            <form>
+        <form className="Form" onSubmit={getUserData}>
               <input
                 type="text"
                 name="email"
@@ -50,9 +47,7 @@ export function Login() {
                 }}
               />
               <button type="submit" className="submit-button">Connexion</button>
-            </form>
-          </div>
-        </div>
+        </form>
       )}
     </>
   );

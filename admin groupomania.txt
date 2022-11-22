@@ -1,0 +1,2 @@
+email: admin@groupomania
+pwd: AdminGroupomania
