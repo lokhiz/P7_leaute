@@ -2,10 +2,13 @@ import "./Login.css";
 import axios from "axios";
 import logo from "../../assets/icon-left-font.png";
 import { useState } from "react";
+import { Router, Link, Navigate } from "react-router-dom";
+import Home from "../Home/Home";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
 
   async function getUserData(e) {
     e.preventDefault();
@@ -15,6 +18,7 @@ export function Login() {
         email: email,
         password: password,
       });
+      setSuccess(true);
     } catch (error) {
       console.log(error);
     }
@@ -22,6 +26,9 @@ export function Login() {
 
   return (
     <>
+      {success ? (
+        <Navigate to='/homepage' replace />
+      ) : (
         <div className="Form" onSubmit={getUserData}>
           <img src={logo} alt="Groupomania" className="logo" />
           <div className="inputs">
@@ -49,6 +56,7 @@ export function Login() {
             </form>
           </div>
         </div>
+      )}
     </>
   );
 }

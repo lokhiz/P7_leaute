@@ -1,8 +1,11 @@
 
+import logo from "../../assets/icon-left-font.png";
 
 export const Home = () => {
   return (
-    <div>Home</div>
+    <section>
+      <img src={logo} alt="Groupomania" className="logo" />
+    </section>
   )
 }
 
