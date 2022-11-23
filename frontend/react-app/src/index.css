@@ -141,6 +141,7 @@ main {
 .top-buttons {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 10px;
   margin: 10px;
   font-size: 14px;
@@ -198,6 +199,28 @@ nav {
 
 /* Homepage */
 
+.home-top-button {
+  position: fixed;
+  bottom: 10px;
+  left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  width: 80px;
+  font-size: 14px;
+  background-color: #fd2d01;
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+}
+
+.home-top-button:hover {
+  background-color: #ffd7d7;
+  border: none;
+}
+
 .posts {
   margin-top: 50px;
   gap: 150px;
@@ -212,21 +235,30 @@ nav {
   width: 70%;
 }
 
-.img-post {
+.img-post-container {
   flex: 1;
   position: relative;
 }
 
-.img-post::after {
+.img-post-container::after {
   content: '';
   width: 100%;
   height: 100%;
   background-color: #4e5166;
   position: absolute;
-  top: 20px;
-  left: -30px;
+  top: 15px;
+  left: -20px;
   z-index: -1;
 }
+
+
+.img-post {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+
 
 .content {
   flex: 2;
@@ -237,4 +269,32 @@ nav {
 .content:visited {
   text-decoration: none;
   color: black;
+}
+
+.readmore-button {
+  border-radius: 20px;
+  padding: 15px 20px;
+}
+
+/* Single page */
+
+.single {
+  display: flex;
+  gap: 50px;
+}
+
+.content {
+  flex: 5;
+  position: relative;
+}
+
+.menu {
+  flex: 2;
+}
+
+.user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }

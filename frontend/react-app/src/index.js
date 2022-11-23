@@ -7,6 +7,8 @@ import ErrorPage from "./error-page";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 import Home from "./Components/Home";
+import Single from './Components/Single'
+import Write from './Components/Write'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
         path: "/homepage",
         element: <Home />,
       },
+      {
+        path: "/post",
+        element: <Single />
+      },
+      {
+        path: "/publish",
+        element: <Write />
+      }
     ],
   },
 ]);
