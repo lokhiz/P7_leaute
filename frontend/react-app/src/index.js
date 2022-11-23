@@ -9,11 +9,15 @@ import Login from "./Components/Login";
 import Home from "./Components/Home";
 import Single from './Components/Single'
 import Write from './Components/Write'
+import Footer from './Components/Footer'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <div>
+      <App />
+      <Footer />
+    </div>,
     errorElement: <ErrorPage />,
     children: [
       {
