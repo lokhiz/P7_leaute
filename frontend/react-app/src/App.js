@@ -1,22 +1,20 @@
 import "./index.css";
-import {
-  Link,
-  Outlet,
-} from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import logo from "./assets/icon-left-font.png";
-
 
 const App = () => {
   return (
     <>
       <div className="App">
+        <div className="header">
           <img src={logo} alt="Groupomania" className="logo" />
-        <Link to={"/register"} className="top-buttons">
-          Inscription
-        </Link>
-        <Link to={"/login"} className="top-buttons">
-          Connexion
-        </Link>
+          <Link to={"/register"} className="top-buttons">
+            Inscription
+          </Link>
+          <Link to={"/login"} className="top-buttons">
+            Connexion
+          </Link>
+        </div>
       </div>
       <div id="detail">
         <Outlet />

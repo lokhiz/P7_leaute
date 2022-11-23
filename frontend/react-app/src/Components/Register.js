@@ -28,6 +28,7 @@ export function Register() {
         </section>
       ) : (
         <form className="Form" onSubmit={postUserData}>
+          <h1 className="form-title">Inscription</h1>
           <input
             name="email"
             type="email"

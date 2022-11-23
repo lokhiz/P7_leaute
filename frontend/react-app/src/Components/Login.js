@@ -27,6 +27,7 @@ export function Login() {
         <Navigate to='/homepage' replace />
       ) : (
         <form className="Form" onSubmit={getUserData}>
+              <h1 className="form-title">Connexion</h1>
               <input
                 type="text"
                 name="email"
