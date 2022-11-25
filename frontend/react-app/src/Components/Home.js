@@ -27,7 +27,7 @@ export const Home = () => {
   return (
     <>
       <div className="Home">
-        <Link to={"/post"} className="home-top-button">
+        <Link to={"/publish"} className="home-top-button">
           Publier
         </Link>
         <div className="posts">
@@ -41,9 +41,7 @@ export const Home = () => {
                   <h1 className="post-title">{post.title}</h1>
                   <p>{post.desc}</p>
                 </Link>
-                <Link to={`/post/${post.id}`}>
-                  <button className="readmore-button">Lire la suite</button>
-                </Link>
+                <button className="readmore-button">Lire la suite</button>
               </div>
             </div>
           ))}
