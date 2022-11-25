@@ -17,6 +17,7 @@ export function Register() {
       setSuccess(true);
     } catch (error) {
       console.log(error);
+      alert('Une erreur est survenue.')
     }
   }
 

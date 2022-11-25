@@ -48,8 +48,9 @@ header {
 
 .success-message {
   display: flex;
-  padding: 50px;
+  padding-top: 50px;
   justify-content: center;
+  padding-bottom: 100px;
 }
 
 input {
@@ -384,6 +385,10 @@ p {
 
 .content-write {
   flex: 5;
+}
+
+.file-upload {
+  width: 100%;
 }
 
 .editor {

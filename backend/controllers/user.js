@@ -36,7 +36,7 @@ exports.login = (req, res, next) => {
           } else {
             res.status(200).json({
               userId: user._id,
-              token: jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, "RANDOM_TOKEN_SECRET", {
+              token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {
                 expiresIn: "24h",
               }),
             });
@@ -48,5 +48,6 @@ exports.login = (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
-  res.cookie('vis', '', { maxAge: 1 });
-}
+  res.cookie("jwt", ""({ expiresIn: "24h" }));
+  res.redirect("http://localhost:3000/register");
+};

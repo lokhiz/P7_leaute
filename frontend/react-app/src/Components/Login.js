@@ -18,36 +18,39 @@ export function Login() {
       setSuccess(true);
     } catch (error) {
       console.log(error);
+      alert("Une erreur est survenue.");
     }
   }
 
   return (
     <>
       {success ? (
-        <Navigate to='/homepage' replace />
+        <Navigate to="/homepage" replace />
       ) : (
         <form className="Form" onSubmit={getUserData}>
-              <h1 className="form-title">Connexion</h1>
-              <input
-                type="text"
-                name="email"
-                placeholder="Email :"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
+          <h1 className="form-title">Connexion</h1>
+          <input
+            type="text"
+            name="email"
+            placeholder="Email :"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
 
-              <input
-                type="password"
-                name="password"
-                placeholder="Mot de passe :"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-              <button type="submit" className="submit-button">Connexion</button>
+          <input
+            type="password"
+            name="password"
+            placeholder="Mot de passe :"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <button type="submit" className="submit-button">
+            Connexion
+          </button>
         </form>
       )}
     </>

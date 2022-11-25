@@ -31,10 +31,9 @@ export const Home = () => {
 
     try {
       await axios.post('http://localhost:5000/api/auth/logout', {
-        
       })
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   }
 
@@ -61,7 +60,7 @@ export const Home = () => {
           ))}
         </div>
       </div>
-      <Link onClick={userLogout} to={"/homepage"} className="disconnect-button">
+      <Link onClick={userLogout} className="disconnect-button">
         Déconnexion
       </Link>
     </>

@@ -16,8 +16,7 @@ const Write = () => {
       <div className="menu-write">
         <div className="item-write">
           <h2>Publier</h2>
-          <input style={{display: "none"}} type="file" id="file" name="" />
-          <label htmlFor="file">Upload Image</label>
+          <input className='file-upload' type="file" id="file" name="" />
           <div className="buttons">
             <button>Update</button>
           </div>
