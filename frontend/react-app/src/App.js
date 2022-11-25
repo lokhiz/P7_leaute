@@ -1,7 +1,6 @@
 import "./index.css";
 import { Link, Outlet } from "react-router-dom";
 import logo from "./assets/icon-left-font.png";
-import Footer from "./Components/Footer";
 
 const App = () => {
   return (

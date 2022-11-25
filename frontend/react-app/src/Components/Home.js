@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 export const Home = () => {
   const posts = [
@@ -24,6 +25,19 @@ export const Home = () => {
       img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png",
     },
   ];
+
+  async function userLogout(e) {
+    e.preventDefault()
+
+    try {
+      await axios.post('http://localhost:5000/api/auth/logout', {
+        
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <div className="Home">
@@ -47,7 +61,7 @@ export const Home = () => {
           ))}
         </div>
       </div>
-      <Link to={"/login"} className="disconnect-button">
+      <Link onClick={userLogout} to={"/homepage"} className="disconnect-button">
         Déconnexion
       </Link>
     </>

@@ -56,10 +56,9 @@ input {
   width: 300px;
   height: 50px;
   border-radius: 10px;
-  border: 1px solid #4e5166;
+  border: 1px solid lightgray;
   padding: 0 10px;
   font-size: 22px;
-  margin: 0 10px;
 }
 
 .title {
@@ -378,12 +377,24 @@ p {
 
 .write {
   margin-top: 20px;
+  padding: 20px 60px;
   display: flex;
   gap: 20px;
 }
 
 .content-write {
   flex: 5;
+}
+
+.editor {
+  height: 100%;
+  border: none;
+}
+
+.editor-container {
+  height: 300px;
+  overflow: scroll;
+  border: 1px solid lightgray;
 }
 
 .menu-write {
@@ -393,8 +404,16 @@ p {
   gap: 20px;
 }
 
-.text-write {
+.title-write {
+  margin-bottom: 40px;
+  width: 100%;
   position: relative;
+}
+
+.item-write {
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 /* Footer */
