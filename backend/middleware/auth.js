@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(400).send("Accès refusé.");
+    res.status(400).json({ error });
   }
 };
 
