@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cookie = require("cookie-parser");
 const User = require("../models/User");
 
 exports.register = (req, res, next) => {
@@ -34,16 +35,16 @@ exports.login = (req, res, next) => {
                 .status(401)
                 .json({ message: "Identifiant ou mot de passe incorrecte" });
             } else {
-              res.status(200).json({
-                userId: user._id,
-                token: jwt.sign(
-                  { userId: user._id },
-                  "RANDOM_TOKEN_SECRET",
-                  {
-                    expiresIn: "24h",
-                  }
-                ),
-              });
+              const token = jwt.sign({ userId: user._id }, "jwtkey");
+
+              res
+                .cookie("access_token", token, {
+                  httpOnly: true,
+                  secure: true,
+                  sameSite: false,
+                })
+                .status(200)
+                .json("done");
             }
           })
           .catch((error) => res.status(500).json({ error }));
@@ -53,7 +54,7 @@ exports.login = (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
-  jwt.sign('RANDOM_TOKEN_SECRET', "", { expiresIn: 1 }, (logout, err) => {
+  jwt.sign("RANDOM_TOKEN_SECRET", "", { maxAge: 0 }, (logout, err) => {
     if (logout) {
       res.send({ message: "Vous avez bien été déconnecté." });
     } else {

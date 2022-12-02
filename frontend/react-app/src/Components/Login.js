@@ -7,6 +7,8 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
 
+  axios.defaults.withCredentials = true;
+
   async function getUserData(e) {
     e.preventDefault();
 

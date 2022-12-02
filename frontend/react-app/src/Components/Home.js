@@ -62,7 +62,7 @@ export const Home = () => {
           ))}
         </div>
       </div>
-      <Link to={"/login"} onClick={userLogout} className="disconnect-button">
+      <Link onClick={userLogout} className="disconnect-button">
         Déconnexion
       </Link>
     </>
