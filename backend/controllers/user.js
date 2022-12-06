@@ -35,16 +35,21 @@ exports.login = (req, res, next) => {
                 .status(401)
                 .json({ message: "Identifiant ou mot de passe incorrecte" });
             } else {
-              const token = jwt.sign({ userId: user._id }, "jwtkey");
+              const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, "jwtkey");
 
               res
-                .cookie("access_token", token, {
-                  httpOnly: true,
-                  secure: true,
-                  sameSite: false,
-                })
+                .cookie(
+                  "access_token",
+                  token,
+                  { maxAge: 86400000 },
+                  {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: false,
+                  }
+                )
                 .status(200)
-                .json("done");
+                .json("Token created");
             }
           })
           .catch((error) => res.status(500).json({ error }));
@@ -54,11 +59,19 @@ exports.login = (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
-  jwt.sign("RANDOM_TOKEN_SECRET", "", { maxAge: 0 }, (logout, err) => {
-    if (logout) {
-      res.send({ message: "Vous avez bien été déconnecté." });
-    } else {
-      res.send({ message: "erreur" });
-    }
-  });
+  const token = jwt.sign("jwtkey", "a");
+
+  res
+    .cookie(
+      "access_token",
+      token,
+      { maxAge: 1 },
+      {
+        httpOnly: true,
+        secure: true,
+        sameSite: false,
+      }
+    )
+    .status(200)
+    .json("Disconnected.");
 };
