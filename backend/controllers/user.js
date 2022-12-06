@@ -35,7 +35,10 @@ exports.login = (req, res, next) => {
                 .status(401)
                 .json({ message: "Identifiant ou mot de passe incorrecte" });
             } else {
-              const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, "jwtkey");
+              const token = jwt.sign(
+                { userId: user._id, isAdmin: user.isAdmin },
+                "jwtkey"
+              );
 
               res
                 .cookie(
