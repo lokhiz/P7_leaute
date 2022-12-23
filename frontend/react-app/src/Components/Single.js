@@ -2,36 +2,51 @@ import Delete from "../assets/delete.png";
 import Edit from "../assets/edit.png";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import moment from "moment";
+import { useState, useEffect } from "react";
+import { useContext } from "react";
 
 const Single = () => {
+  const [post, setPost] = useState({});
+
+  const postId = window.location.pathname.split("/")[2];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/api/posts/${postId}`
+        );
+        setPost(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  });
   return (
     <div className="single">
       <div className="content-single">
         <div className="img-and-user">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png"
-            alt=""
-            className="img-post"
-          />
+          <img src={post?.img} alt="" className="img-post" />
           <div className="user">
             <div className="user-without-icons">
-              <img
-                src="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive-960x540.jpg"
-                alt=""
-                className="user-img"
-              />
+              <img src={post.email} alt="" className="user-img" />
               <div className="info">
                 <span>John</span>
-                <p>Posted 2 days ago</p>
+                <p>Posted {moment(post.date).fromNow()}</p>
               </div>
             </div>
             <div className="edit">
-              <Link to={`/write?edit=2`}>
-                <img className="icons" src={Edit} alt="" />
-              </Link>
-              <Link>
-                <img className="icons" src={Delete} alt="" />
-              </Link>
+              <div className="edit">
+                <Link to={`/write?edit=2`}>
+                  <img className="icons" src={Edit} alt="" />
+                </Link>
+                <Link>
+                  <img className="icons" src={Delete} alt="" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

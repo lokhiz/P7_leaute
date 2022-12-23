@@ -2,22 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error-page";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 import Home from "./Components/Home";
-import Single from './Components/Single'
-import Write from './Components/Write'
-import Footer from './Components/Footer'
+import Single from "./Components/Single";
+import Write from "./Components/Write";
+import Footer from "./Components/Footer";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>
-      <App />
-      <Footer />
-    </div>,
+    element: (
+      <div>
+        <App />
+        <Footer />
+      </div>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -34,12 +36,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/post",
-        element: <Single />
+        element: <Single />,
       },
       {
         path: "/publish",
-        element: <Write />
-      }
+        element: <Write />,
+      },
     ],
   },
 ]);

@@ -2,19 +2,21 @@ const Post = require("../models/Post");
 const fs = require("fs");
 
 exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.post);
-  delete postObject._id;
+  const postObject = req.body
   const post = new Post({
     ...postObject,
     likes: 0,
+    dislikes: 0,
+    usersDisliked: [],
+    usersLiked: [],
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
+      req.file
     }`,
   });
   post
     .save()
-    .then(() => res.status(201).json({ message: "Post enregistré" }))
-    .catch((error) => res.status(400).json({ error }));
+    .then(() => res.status(201).json({ message: "Post saved" }))
+    .catch((error) => res.status(500).json({ error }));
 };
 
 exports.modifyPost = (req, res, next) => {
@@ -54,13 +56,13 @@ exports.deletePost = (req, res, next) => {
 
 exports.getOnePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
-    .then(post => res.status(200).json(post))
-    .catch(error => res.status(400).json({ error }));
+    .then((post) => res.status(200).json(post))
+    .catch((error) => res.status(400).json({ error }));
 };
 
 exports.getAllPosts = (req, res, next) => {
   Post.find()
-    .then((post) => res.status(200).json(post))
+    .then((posts) => res.status(200).json(posts))
     .catch((error) => res.status(400).json({ error }));
 };
 
@@ -101,6 +103,18 @@ exports.likePost = (req, res, next) => {
               res.status(200).json({ message: "Post disliké" });
             })
             .catch((error) => res.status(500).json({ error }));
+        } else if (post.usersDisliked.includes(userId)) {
+          Post.updateOne(
+            { _id: postId },
+            {
+              $pull: { usersDisliked: userId },
+              $inc: { dislikes: -1 },
+            }
+          )
+            .then((post) => {
+              res.status(200).json({ message: "Post liké" });
+            })
+            .catch((error) => res.status(401).json({ error }));
         }
       })
       .catch((error) => res.status(401).json({ error }));

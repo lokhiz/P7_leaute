@@ -65,16 +65,11 @@ exports.logout = (req, res, next) => {
   const token = jwt.sign("jwtkey", "a");
 
   res
-    .cookie(
-      "access_token",
-      token,
-      { maxAge: 1 },
-      {
-        httpOnly: true,
-        secure: true,
-        sameSite: false,
-      }
-    )
+    .clearCookie("access_token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: false,
+    })
     .status(200)
     .json("Disconnected.");
 };

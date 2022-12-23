@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 
-exports.auth = (req, res, next) => {
+module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, "jwtkey");
-    const userId = decodedToken.userId;
+    const userId = decodedToken.user._id;
 
     req.auth = {
       userId: userId,
@@ -14,14 +14,4 @@ exports.auth = (req, res, next) => {
   } catch (error) {
     res.status(400).json({ error });
   }
-};
-
-exports.isAdmin = (req, res, next) => {
-  auth(req, res, () => {
-    if (req.auth.isAdmin) {
-      next();
-    } else {
-      res.status(403).send("Accès refusé.");
-    }
-  });
 };

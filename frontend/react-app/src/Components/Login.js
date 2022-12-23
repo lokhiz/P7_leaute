@@ -17,6 +17,7 @@ export function Login() {
         email: email,
         password: password,
       });
+      localStorage.setItem("auth", true);
       setSuccess(true);
     } catch (error) {
       console.log(error);

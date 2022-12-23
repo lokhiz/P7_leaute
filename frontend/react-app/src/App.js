@@ -7,7 +7,7 @@ const App = () => {
     <>
       <div className="App">
         <div className="header">
-          <Link to={'/homepage'} >
+          <Link to={"/homepage"}>
             <img src={logo} alt="Groupomania" className="logo" />
           </Link>
           <Link to={"/register"} className="top-buttons">
