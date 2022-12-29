@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const multer = require('multer')
 
 const postsRoutes = require("./routes/posts");
 const userRoutes = require("./routes/user");
@@ -34,8 +35,23 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/images", express.static(path.join(__dirname, "images")));
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
+});
+
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  res.status(200).json("File has been uploaded");
+});
+
 app.use("/api/posts", postsRoutes);
 app.use("/api/auth", userRoutes);
-app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
