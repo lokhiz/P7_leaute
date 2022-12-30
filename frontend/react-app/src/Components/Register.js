@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import logo from "../assets/icon-left-font.png";
 
 export function Register() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ export function Register() {
       setSuccess(true);
     } catch (error) {
       console.log(error);
-      alert('Une erreur est survenue.')
+      alert("Une erreur est survenue.");
     }
   }
 
@@ -29,6 +30,7 @@ export function Register() {
         </section>
       ) : (
         <form className="Form" onSubmit={postUserData}>
+          <img src={logo} alt="Groupomania" className="logo" />
           <h1 className="form-title">Inscription</h1>
           <input
             name="email"
@@ -51,7 +53,9 @@ export function Register() {
               }}
             />
           </div>
-          <button type="submit" className="submit-button">Inscription</button>
+          <button type="submit" className="submit-button">
+            Inscription
+          </button>
         </form>
       )}
     </>

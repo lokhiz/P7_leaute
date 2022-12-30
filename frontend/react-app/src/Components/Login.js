@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import logo from "../assets/icon-left-font.png";
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -31,6 +32,7 @@ export function Login() {
         <Navigate to="/homepage" replace />
       ) : (
         <form className="Form" onSubmit={getUserData}>
+          <img src={logo} alt="Groupomania" className="logo" />
           <h1 className="form-title">Connexion</h1>
           <input
             type="text"

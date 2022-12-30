@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import Disconnect from "./Disconnect";
+import logo from "../assets/icon-left-font.png";
 
 const Write = () => {
   const [title, setTitle] = useState("");
@@ -19,13 +22,13 @@ const Write = () => {
       data.append("file", file);
       newPost.photo = filename;
       try {
-        const res = await axios.post("http://localhost:5000/api/upload", data);
+        await axios.post("http://localhost:5000/api/upload", data);
       } catch (error) {
         console.log(error.response.data);
       }
     }
     try {
-      const res = await axios.post("http://localhost:5000/api/posts/", newPost);
+      await axios.post("http://localhost:5000/api/posts/", newPost);
       alert("Post publié");
       window.location.replace("http://localhost:3000/homepage");
     } catch (error) {
@@ -34,44 +37,57 @@ const Write = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="write">
-      <div className="content-write">
-        <input
-          type="text"
-          className="title-write"
-          placeholder="Titre"
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
-        <div className="editor-container">
+    <>
+      <Link to={"/homepage"}>
+        <img src={logo} alt="Groupomania" className="logo" />
+      </Link>
+      <Link to={"/publish"} className="home-top-button">
+        Publier
+      </Link>
+      <form onSubmit={handleSubmit} className="write">
+        <div className="content-write">
           <input
-            className="editor"
-            placeholder="Description"
+            type="text"
+            className="title-write"
+            placeholder="Titre"
             onChange={(e) => {
-              setDesc(e.target.value);
+              setTitle(e.target.value);
             }}
           />
+          <div className="editor-container">
+            <input
+              className="editor"
+              placeholder="Description"
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+            />
+          </div>
         </div>
-      </div>
-      <div className="menu-write">
-        <div className="item-write">
-          <h2>Télécharger une image</h2>
-          {file && (
-            <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
-          )}
-          <input
-            className="file-upload"
-            type="file"
-            name="file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
+        <div className="menu-write">
+          <div className="item-write">
+            <h2>Télécharger une image</h2>
+            {file && (
+              <img
+                className="writeImg"
+                src={URL.createObjectURL(file)}
+                alt="file"
+              />
+            )}
+            <input
+              className="file-upload"
+              type="file"
+              name="file"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+          </div>
+          <button type="submit" className="upload-button">
+            Publier
+          </button>
         </div>
-        <button type="submit" className="upload-button">
-          Publier
-        </button>
-      </div>
-    </form>
+      </form>
+      <Disconnect />
+    </>
   );
 };
 
