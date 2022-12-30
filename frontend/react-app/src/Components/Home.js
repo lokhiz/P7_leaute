@@ -1,21 +1,24 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Posts from "../Components/Posts";
+import { useLocation } from "react-router";
 
 export const Home = () => {
   const [posts, setPosts] = useState([]);
+  const { search } = useLocation();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/posts");
+        const res = await axios.get("http://localhost:5000/api/posts" + search);
         setPosts(res.data);
       } catch (error) {
         console.log(error.response.data);
       }
     };
-    fetchData();
-  }, []);
+    fetchPosts();
+  }, [search]);
 
   async function userLogout(e) {
     e.preventDefault();
@@ -24,9 +27,10 @@ export const Home = () => {
       await axios.post("http://localhost:5000/api/auth/logout");
       window.location.replace("http://localhost:3000/login");
       alert("Vous avez bien été déconnecté.");
-      console.log("succès");
+      localStorage.setItem("auth", false);
     } catch (error) {
-      console.log(error.response.data);
+      alert("Une erreur est survenue.");
+      console.log(error);
     }
   }
 
@@ -36,24 +40,7 @@ export const Home = () => {
         <Link to={"/publish"} className="home-top-button">
           Publier
         </Link>
-        <div className="posts">
-          {posts.map((post) => (
-            <div className="post" key={post._id}>
-              <div className="img-post-container">
-                <img className="img-post" src={post.imageUrl} alt="" />
-              </div>
-              <div className="content-home">
-                <Link className="link" to={`/post/${post._id}`}>
-                  <h1 className="post-title">{post.title}</h1>
-                  <p>{post.description}</p>
-                </Link>
-                <p>`{post.likes}` Likes</p>
-                <p>`{post.dislikes}` Dislikes</p>
-                <button className="readmore-button">Lire la suite</button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Posts posts={posts} />
       </div>
       <Link onClick={userLogout} className="disconnect-button">
         Déconnexion

@@ -3,14 +3,14 @@ import { useState } from "react";
 
 const Write = () => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
     const newPost = {
       title: title,
-      description: description,
+      desc: desc,
     };
     if (file) {
       const data = new FormData();
@@ -20,17 +20,16 @@ const Write = () => {
       newPost.photo = filename;
       try {
         const res = await axios.post("http://localhost:5000/api/upload", data);
-        window.location.replace("/post/" + res.data._id);
       } catch (error) {
         console.log(error.response.data);
       }
     }
     try {
       const res = await axios.post("http://localhost:5000/api/posts/", newPost);
-      alert("Votre post a été bien publié.");
-      window.location.replace("post/" + res.data._id);
+      alert("Post publié");
+      window.location.replace("http://localhost:3000/homepage");
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   }
 
@@ -50,7 +49,7 @@ const Write = () => {
             className="editor"
             placeholder="Description"
             onChange={(e) => {
-              setDescription(e.target.value);
+              setDesc(e.target.value);
             }}
           />
         </div>

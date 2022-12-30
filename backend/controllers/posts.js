@@ -10,7 +10,7 @@ exports.createPost = (req, res, next) => {
     usersDisliked: [],
     usersLiked: [],
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file
+      req.body.name
     }`,
   });
   post
