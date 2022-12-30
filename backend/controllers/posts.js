@@ -9,7 +9,7 @@ exports.createPost = (req, res, next) => {
     dislikes: 0,
     usersDisliked: [],
     usersLiked: [],
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${
+    file: `${req.protocol}://${req.get("host")}/images/${
       req.body.name
     }`,
   });
@@ -21,12 +21,12 @@ exports.createPost = (req, res, next) => {
 
 exports.modifyPost = (req, res, next) => {
   Post.findOne({ _id: req.params.id }).then((post) => {
-    const filename = post.imageUrl.split("/images/")[1];
+    const filename = post.file.split("/images/")[1];
     fs.unlink(`images/${filename}`, () => {
       const postObject = req.file
         ? {
             ...JSON.parse(req.body.post),
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${
+            file: `${req.protocol}://${req.get("host")}/images/${
               req.file.filename
             }`,
           }
@@ -44,7 +44,7 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      const filename = post.imageUrl.split("/images/")[1];
+      const filename = post.file.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
         Post.deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: "Post supprimé" }))
