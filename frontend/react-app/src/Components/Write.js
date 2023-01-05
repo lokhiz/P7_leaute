@@ -32,6 +32,7 @@ const Write = () => {
       alert("Post publié");
       window.location.replace("http://localhost:3000/homepage");
     } catch (error) {
+      alert('Une erreur est survenue. Chaque post doit contenir un titre, une description et une image.')
       console.log(error.response.data);
     }
   }
