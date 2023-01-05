@@ -1,15 +1,13 @@
 import Delete from "../assets/delete.png";
 import Edit from "../assets/edit.png";
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Context } from "../Context/Context";
 
 const Single = () => {
   const location = useLocation();
-  const path = window.location.pathname.split("/")[2];
+  const path = location.pathname.split("/")[2];
   const [post, setPost] = useState({});
   const PF = "http://localhost:5000/images/";
   const { user } = useContext(Context);
@@ -40,7 +38,7 @@ const Single = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`/posts/${post._id}`, {
+      await axios.put(`http://localhost:5000/api/posts/${post._id}`, {
         username: user.username,
         title,
         desc,
@@ -85,17 +83,6 @@ const Single = () => {
               )}
             </h1>
           )}
-          <div className="singlePostInfo">
-            <span className="singlePostAuthor">
-              Author:
-              <Link to={`/?user=${post.username}`} className="link">
-                <b> {post.username}</b>
-              </Link>
-            </span>
-            <span className="singlePostDate">
-              {new Date(post.createdAt).toDateString()}
-            </span>
-          </div>
           {updateMode ? (
             <textarea
               className="singlePostDescInput"

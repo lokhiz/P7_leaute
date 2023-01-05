@@ -2,16 +2,14 @@ const Post = require("../models/Post");
 const fs = require("fs");
 
 exports.createPost = (req, res, next) => {
-  const postObject = req.body
+  const postObject = req.body;
   const post = new Post({
     ...postObject,
     likes: 0,
     dislikes: 0,
     usersDisliked: [],
     usersLiked: [],
-    file: `${req.protocol}://${req.get("host")}/images/${
-      req.body.name
-    }`,
+    file: `${req.protocol}://${req.get("host")}/images/${req.body.name}`,
   });
   post
     .save()
@@ -54,8 +52,8 @@ exports.deletePost = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-exports.getOnePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
+exports.getOnePost = async (req, res, next) => {
+  await Post.findById({ _id: req.params.id })
     .then((post) => res.status(200).json(post))
     .catch((error) => res.status(400).json({ error }));
 };
