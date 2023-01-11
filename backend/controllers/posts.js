@@ -17,39 +17,46 @@ exports.createPost = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-exports.modifyPost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id }).then((post) => {
-    const filename = post.file.split("/images/")[1];
-    fs.unlink(`images/${filename}`, () => {
-      const postObject = req.file
-        ? {
-            ...JSON.parse(req.body.post),
-            file: `${req.protocol}://${req.get("host")}/images/${
-              req.file.filename
-            }`,
-          }
-        : { ...req.body };
-      Post.updateOne(
-        { _id: req.params.id },
-        { ...postObject, _id: req.params.id }
-      )
-        .then(() => res.status(200).json({ message: "Post modifié" }))
-        .catch((error) => res.status(400).json({ error }));
-    });
-  });
+exports.modifyPost = async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (post.username === req.body.username) {
+      try {
+        const updatedPost = await Post.findByIdAndUpdate(
+          req.params.id,
+          {
+            $set: req.body,
+          },
+          { new: true }
+        );
+        res.status(200).json(updatedPost);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(401).json("You can update only your post!");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
-exports.deletePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
-    .then((post) => {
-      const filename = post.file.split("/images/")[1];
-      fs.unlink(`images/${filename}`, () => {
-        Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: "Post supprimé" }))
-          .catch((error) => res.status(400).json({ error }));
-      });
-    })
-    .catch((error) => res.status(500).json({ error }));
+exports.deletePost = async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (post.username === req.body.username) {
+      try {
+        await post.delete();
+        res.status(200).json("Post has been deleted...");
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(401).json("You can delete only your post!");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 exports.getOnePost = async (req, res, next) => {

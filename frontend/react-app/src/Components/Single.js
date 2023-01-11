@@ -1,6 +1,8 @@
 import Delete from "../assets/delete.png";
 import Edit from "../assets/edit.png";
 import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
+import logo from "../assets/icon-left-font.png";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../Context/Context";
@@ -30,8 +32,10 @@ const Single = () => {
       await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
         data: { username: user.username },
       });
-      window.location.replace("/");
+      alert("Post supprimé");
+      window.location.replace("/homepage");
     } catch (error) {
+      // alert('Non autorisé')
       console.log(error);
     }
   };
@@ -45,21 +49,21 @@ const Single = () => {
       });
       setUpdateMode(false);
     } catch (error) {
+      // alert('Non autorisé')
       console.log(error);
     }
   };
 
   return (
     <div className="single">
+      <Link to={"/homepage"}>
+        <img src={logo} alt="Groupomania" className="logo" />
+      </Link>
       <div className="content-single">
-        <div className="img-and-user">
-          {post.photo && (
-            <img
-              src={PF + post.photo}
-              alt="post"
-              className="img-post"
-            />
-          )}
+        {post.photo && (
+          <img src={PF + post.photo} alt="post" className="img-post" />
+        )}
+        <div className="text-block-single">
           {updateMode ? (
             <input
               type="text"
@@ -75,10 +79,15 @@ const Single = () => {
                   <img
                     className="icons"
                     src={Edit}
-                    alt='edit icon'
+                    alt="edit icon"
                     onClick={() => setUpdateMode(true)}
                   />
-                  <img className="icons" src={Delete} alt='delete icon' onClick={handleDelete} />
+                  <img
+                    className="icons"
+                    src={Delete}
+                    alt="delete icon"
+                    onClick={handleDelete}
+                  />
                 </div>
               )}
             </h1>
@@ -92,12 +101,12 @@ const Single = () => {
           ) : (
             <p className="singlePostDesc">{desc}</p>
           )}
-          {updateMode && (
-            <button className="singlePostButton" onClick={handleUpdate}>
-              Update
-            </button>
-          )}
         </div>
+        {updateMode && (
+          <button className="singlePostButton" onClick={handleUpdate}>
+            Update
+          </button>
+        )}
       </div>
     </div>
   );

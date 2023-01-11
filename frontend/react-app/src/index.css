@@ -282,6 +282,16 @@ nav {
   color: black;
 }
 
+.thumbs {
+  object-fit: cover;
+  max-width: 40px;
+}
+
+.thumbs-flex {
+  display: flex;
+  gap: 20px;
+}
+
 /* Single page */
 
 .single {
@@ -293,6 +303,15 @@ nav {
 .content-single {
   gap: 50px;
   position: relative;
+  border: 5px solid #797e9e;
+  padding: 20px 50px;
+  border-radius: 20px;
+}
+
+.img-post {
+  border-radius: 20px;
+  object-fit: cover;
+  max-width: 900px;
 }
 
 .user-img {
@@ -306,6 +325,13 @@ nav {
   width: 35px;
   height: 35px;
   object-fit: cover;
+  cursor: pointer;
+}
+
+.text-block-single {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .user-without-icons {
