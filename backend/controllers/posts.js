@@ -47,7 +47,7 @@ exports.deletePost = async (req, res, next) => {
     if (post.username === req.body.username) {
       try {
         await post.delete();
-        res.status(200).json("Post has been deleted...");
+        res.status(200).json("Post has been deleted.");
       } catch (err) {
         res.status(500).json(err);
       }
@@ -84,7 +84,7 @@ exports.likePost = (req, res, next) => {
         $push: { usersLiked: userId },
       }
     )
-      .then((post) => res.status(200).json({ message: "Post liké" }))
+      .then((post) => console.log(req.body))
       .catch((error) => res.status(500).json({ error }));
   } else if (like === -1) {
     Post.updateOne(

@@ -29,3 +29,5 @@ export const ContextProvider = ({ children }) => {
     </Context.Provider>
   );
 };
+
+export default Context;

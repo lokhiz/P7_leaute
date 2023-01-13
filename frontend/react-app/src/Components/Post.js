@@ -1,50 +1,100 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Like from "../assets/like.png";
 import Dislike from "../assets/dislike.png";
+import axios from "axios";
+import Context from "../Context/Context";
 
 export default function Post({ post }) {
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
   const [activeButton, setActiveButton] = useState("none");
+  const { user } = useContext(Context);
 
-  const handleLikeButton = () => {
+  const handleLikeButton = async () => {
     if (activeButton === "none") {
-      setLikeCount(likeCount + 1);
-      setActiveButton("like");
-      return;
+      try {
+        setLikeCount(likeCount + 1);
+        setActiveButton("like");
+        await axios.post(`http://localhost:5000/api/posts/${post._id}/like`, {
+          postId: post._id,
+          usersLiked: user._id,
+          like: likeCount,
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     if (activeButton === "like") {
-      setLikeCount(likeCount - 1);
-      setActiveButton("none");
-      return;
+      try {
+        setLikeCount(likeCount - 1);
+        setActiveButton("none");
+        await axios.post(`http://localhost:5000/api/posts/${post._id}/like`, {
+          usersLiked: user._id,
+          like: likeCount,
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     if (activeButton === "dislike") {
-      setLikeCount(likeCount + 1);
-      setDislikeCount(dislikeCount - 1);
-      setActiveButton("like");
+      try {
+        await axios.post(`http://localhost:5000/api/posts/${post._id}/like`, {
+          usersLiked: user._id,
+          like: likeCount,
+          dislike: dislikeCount,
+        });
+        setLikeCount(likeCount + 1);
+        setDislikeCount(dislikeCount - 1);
+        setActiveButton("like");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
-  const handleDislikeButton = () => {
+  const handleDislikeButton = async () => {
     if (activeButton === "none") {
-      setDislikeCount(dislikeCount + 1);
-      setActiveButton("dislike");
-      return;
+      try {
+        await axios.post(`http://localhost:5000/api/posts/${post._id}/like`, {
+          usersDisliked: user._id,
+          dislike: dislikeCount,
+        });
+        setDislikeCount(dislikeCount + 1);
+        setActiveButton("dislike");
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     if (activeButton === "dislike") {
-      setDislikeCount(dislikeCount - 1);
-      setActiveButton("none");
-      return;
+      try {
+        await axios.post(`http://localhost:5000/api/posts/${post._id}/like`, {
+          usersDisliked: user._id,
+          dislike: dislikeCount,
+        });
+        setDislikeCount(dislikeCount - 1);
+        setActiveButton("none");
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     if (activeButton === "like") {
-      setDislikeCount(dislikeCount + 1);
-      setLikeCount(likeCount - 1);
-      setActiveButton("dislike");
+      try {
+        await axios.post(`http://localhost:5000/api/posts/${post._id}/like`, {
+          usersDisliked: user._id,
+          like: likeCount.like,
+          dislike: dislikeCount,
+        });
+        setDislikeCount(dislikeCount + 1);
+        setLikeCount(likeCount - 1);
+        setActiveButton("dislike");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
